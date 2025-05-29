@@ -13,7 +13,7 @@ function getRandomInt(max) {
 }
 
 function registrardueño(callback) {
-  setTimeout(function () {
+
     do {
       var id = getRandomInt(1000);
     } while (id in dueños);
@@ -25,6 +25,7 @@ function registrardueño(callback) {
       };
     } while (name.length == 0);
 
+    
     do {
       var cedula = (prompt("Cedula (Sin puntuación - 10 Digitos): "));
       var cont = 0;
@@ -42,6 +43,8 @@ function registrardueño(callback) {
         };
       };
     } while (isNaN(cedula) || cedula.length == 0 || cedula.length < 10 || cont == 1);
+
+    setTimeout(function () {
 
     do {
       var telefono = (prompt("Telefono (Sin espacios - 10 digitos): "));
@@ -65,12 +68,13 @@ function registrardueño(callback) {
     };
 
     dueños[id] = datos;
+    alert("Registro Exitoso")
     callback();
   }, 1500);
+
 };
 
 function registrar(callback) {
-  setTimeout(function () {
     var cont = 0;
     var cont2 = 0;
 
@@ -103,6 +107,8 @@ function registrar(callback) {
         alert("Dueño no Registrado");
       };
     } while (cont == 0);
+
+  setTimeout(function () {
 
     do {
       var name = prompt("Nombre de la mascota: ");
