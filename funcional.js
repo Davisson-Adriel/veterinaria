@@ -62,9 +62,9 @@ function registrardueño() {
 };
 
 function registrar() {
-  
- var cont=0;
- var cont2=0;
+
+  var cont = 0;
+  var cont2 = 0;
 
   do {
 
@@ -72,9 +72,9 @@ function registrar() {
 
     for (const i in mascotas) {
       for (const j in mascotas[i]) {
-        if (j=="Id"){
-          if (mascotas[i][j]==id){
-            cont2=1;
+        if (j == "Id") {
+          if (mascotas[i][j] == id) {
+            cont2 = 1;
           };
         };
       };
@@ -86,19 +86,19 @@ function registrar() {
   do {
 
     var cedula = prompt("Ingrese la cedula del dueño: ");
-    
+
     for (const i in dueños) {
       for (const j in dueños[i]) {
-        if (j=="Cedula"){
-          if (dueños[i][j]==cedula){
-            cont=1;
-            var dueño=i;
+        if (j == "Cedula") {
+          if (dueños[i][j] == cedula) {
+            cont = 1;
+            var dueno = i;
           }
         };
       };
     };
 
-    if (cont==0){
+    if (cont == 0) {
       alert("Dueño no Registrado");
     };
 
@@ -164,13 +164,10 @@ function registrar() {
     Peso: peso,
     Estado: estado,
     Id: id,
-    Id_Dueño: dueño
+    IdDueno: dueno
   };
 
   mascotas[name] = datos;
-
-  dueños[dueño] = mascotas[name];
-
 
 };
 
@@ -263,35 +260,49 @@ function eliminar() {
 };
 
 function verpordueño() {
-var cont=0;
-  var cedula = prompt("Ingrese la cedula del dueño: ");
-    
+
+  var cont = 0;
+  do {
+
+    var cedula = prompt("Ingrese la cedula del dueño: ");
+
     for (const i in dueños) {
       for (const j in dueños[i]) {
-        if (j=="Cedula"){
-          if (dueños[i][j]==cedula){
-            
-            cont=1;
-
-          };
+        if (j == "Cedula") {
+          if (dueños[i][j] == cedula) {
+            cont = 1;
+            var num = i;
+          }
         };
       };
     };
 
-    if (cont==0){
+    if (cont == 0) {
       alert("Dueño no Registrado");
-    } else {
+    };
 
-      for (const i in dueños) {
-        console.log(i);
-        console.log("-------------------");
-        for (const j in dueños[i]) {
-          console.log(j, " - ", dueños[i][j]);
+  } while (cont == 0);
+
+  for (const i in mascotas) {
+    for (const j in mascotas[i]) {
+      if (j == "IdDueno") {
+        if (mascotas[i][j] == num) {
+
+          for (const x in mascotas) {
+            console.log(x);
+            console.log("-------------------");
+            for (const z in mascotas[x]) {
+              console.log(z, " - ", mascotas[x][z]);
+            };
+          };
+
+
         };
       };
-
     };
-  
+  };
+
+
 
 };
 
@@ -339,5 +350,5 @@ function menu() {
 
     }
 
-  } while (opc != 6);
+  } while (opc != 8);
 };
