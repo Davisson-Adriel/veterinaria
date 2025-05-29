@@ -1,55 +1,132 @@
 const mascotas = {};
-
-saludo(function(){
-  
-  menu();
-
-});
+const dueños = {};
 
 function saludo(callback) {
-  
-  setTimeout(function(){
-    alert("BIENVENIDO AL SISTEMA :)");
+
+  setTimeout(function () {
+    alert("BIENVENIDO :)");
     callback();
-  }, 3000);
-  
+  }, 1000);
+
 };
 
-function registrar(){
-  
-  var name = prompt("Nombre: ");
-  var especie = prompt("Especie: ");
+function getRandomInt(max) {
+  return Math.floor(Math.random() * max);
+}
+
+function registrardueño() {
 
   do {
-      var edad = Number(prompt("Edad (Años): "));
+    var id = getRandomInt(1000);
+  } while (id in dueños);
 
-      if (isNaN(edad)){
-        alert("Valor no valido");
-      }
-    } while (isNaN(edad));
+  do {
+    var name = prompt("Nombre: ");
+    if (name.length == 0) {
+      alert("No se puede dejar el campo vacio");
+    };
+  } while (name.length == 0);
 
-    do {
-      var peso = Number(prompt("Peso (Kg): "));
+  do {
+    var cedula = (prompt("Cedula (Sin puntuación - 10 Digitos): "));
 
-      if (isNaN(peso)){
-        alert("Valor no valido");
-      }
-    } while (isNaN(peso));
+    if (isNaN(cedula) || cedula.length == 0 || cedula.length < 10) {
+      alert("Cedula no valida");
+    }
+  } while (isNaN(cedula) || cedula.length == 0 || cedula.length < 10);
 
-    do {
+  do {
+    var telefono = (prompt("Telefono (Sin espacios - 10 digitos): "));
 
-    var opc= Number(prompt("Seleccione el estado de la mascota \n 1. Sano \n 2. Enfermo \n 3. En recuperación"));
+    if (isNaN(telefono) || telefono.length == 0 || telefono.length < 10) {
+      alert("Telefono no valido");
+    }
+  } while (isNaN(telefono) || telefono.length == 0 || telefono.length < 10);
+
+  do {
+    var email = prompt("Correo Electrónico: ");
+    if (email.length == 0) {
+      alert("No se puede dejar el campo vacio");
+    };
+  } while (email.length == 0);
+
+  const datos = {
+    Nombre: name,
+    Cedula: cedula,
+    Telefono: telefono,
+    Correo: email
+  };
+
+  dueños[id] = datos;
+
+};
+
+function registrar() {
+  cont=0;
+  do {
+
+    var cedula = prompt("Ingrese la cedula del dueño: ");
+    
+    for (const i in dueños) {
+      for (const j in dueños[i]) {
+        if (j=="Cedula"){
+          if (dueños[i][j]==cedula){
+            cont=1;
+          }
+        };
+      };
+    };
+
+    if (cont==0){
+      alert("Dueño no Registrado");
+    }
+
+  } while (cont == 0);
+
+  do {
+    var name = prompt("Nombre de la mascota: ");
+    if (name.length == 0) {
+      alert("No se puede dejar el campo vacio");
+    };
+  } while (name.length == 0);
+
+  do {
+    var especie = prompt("Especie: ");
+    if (especie.length == 0) {
+      alert("No se puede dejar el campo vacio");
+    };
+  } while (especie.length == 0);
+
+  do {
+    var edad = (prompt("Edad (Años): "));
+
+    if (isNaN(edad) || edad.length == 0) {
+      alert("Valor no valido");
+    }
+  } while (isNaN(edad) || edad.length == 0);
+
+  do {
+    var peso = (prompt("Peso (Kg): "));
+
+    if (isNaN(peso) || peso.length == 0) {
+      alert("Valor no valido");
+    }
+  } while (isNaN(peso) || peso.length == 0);
+
+  do {
+
+    var opc = Number(prompt("Seleccione el estado de la mascota \n 1. Sano \n 2. Enfermo \n 3. En recuperación"));
 
     switch (opc) {
 
       case 1:
-        estado="Sano";
+        estado = "Sano";
         break;
       case 2:
-        estado="Enfermo";
+        estado = "Enfermo";
         break;
       case 3:
-        estado="En recuperación";
+        estado = "En recuperación";
         break;
       default:
         alert("Valor invalido");
@@ -66,87 +143,87 @@ function registrar(){
     Peso: peso,
     Estado: estado
   };
-  mascotas[name] = datos; 
+  mascotas[name] = datos;
 
 };
 
-function listar(){
+function listar() {
 
-  for (const i in mascotas){
+  for (const i in mascotas) {
     console.log(i);
     console.log("-------------------");
-    for (const j in mascotas[i]){
-      console.log(j," - ", mascotas[i][j]);
+    for (const j in mascotas[i]) {
+      console.log(j, " - ", mascotas[i][j]);
     }
   }
 
 };
 
-function buscar(){
+function buscar() {
 
   var busq = prompt("Ingrese el nombre: ");
 
-  if (busq in mascotas){
-      console.log(busq);
-      console.log("-------------------");
-      for (const j in mascotas[busq]){
-        console.log(j," - ", mascotas[busq][j]);
-      };
-   
+  if (busq in mascotas) {
+    console.log(busq);
+    console.log("-------------------");
+    for (const j in mascotas[busq]) {
+      console.log(j, " - ", mascotas[busq][j]);
+    };
+
   } else {
 
     alert("Mascota no registrada");
 
-    };
+  };
 };
 
-function actualizar(){
+function actualizar() {
 
   var busq = prompt("Ingrese el nombre: ");
 
-  if (busq in mascotas){
-      
-  do {
+  if (busq in mascotas) {
 
-    var opc= Number(prompt("Seleccione el estado de la mascota \n 1. Sano \n 2. Enfermo \n 3. En recuperación"));
+    do {
 
-    switch (opc) {
+      var opc = Number(prompt("Seleccione el estado de la mascota \n 1. Sano \n 2. Enfermo \n 3. En recuperación"));
 
-      case 1:
-        estado="Sano";
-        break;
-      case 2:
-        estado="Enfermo";
-        break;
-      case 3:
-        estado="En recuperación";
-        break;
-      default:
-        alert("Valor invalido");
-        break;
+      switch (opc) {
 
-    }
+        case 1:
+          estado = "Sano";
+          break;
+        case 2:
+          estado = "Enfermo";
+          break;
+        case 3:
+          estado = "En recuperación";
+          break;
+        default:
+          alert("Valor invalido");
+          break;
 
-  } while (opc !== 1 && opc !== 2 && opc !== 3);
+      }
 
-    mascotas[busq]["Estado"]=estado;
+    } while (opc !== 1 && opc !== 2 && opc !== 3);
+
+    mascotas[busq]["Estado"] = estado;
 
     alert("Estado Actualizado")
-  
+
   } else {
 
     alert("Mascota no registrada");
 
-    };
+  };
 
 };
 
-function eliminar(){
+function eliminar() {
 
   var busq = prompt("Ingrese el nombre de la mascota a eliminar: ");
 
-  if (busq in mascotas){
-      
+  if (busq in mascotas) {
+
     delete mascotas[busq];
     alert("Mascota Eliminada con exito");
 
@@ -154,33 +231,46 @@ function eliminar(){
 
     alert("Mascota no registrada");
 
-    };
+  };
 
 }
 
-function menu(){
+
+saludo(function () {
+
+  menu();
+
+});
+
+function menu() {
   do {
 
-    var opc= Number(prompt(" 1. Registrar Mascota \n 2. Listar Mascotas \n 3. Buscar por nombre \n 4. Actualizar estado de salud \n 5. Eliminar mascota \n 6. Salir "));
+    var opc = Number(prompt(" 1. Registrar Dueño \n 2. Registrar Mascota \n 3. Listar Mascotas \n 4. Buscar por nombre \n 5. Actualizar estado de salud \n 6. Eliminar mascota \n 7. Buscar Mascota por Dueño \n 8. Salir "));
 
     switch (opc) {
 
       case 1:
-        registrar();
+        registrardueño();
         break;
       case 2:
-        listar();
+        registrar();
         break;
       case 3:
-        buscar();
+        listar();
         break;
       case 4:
-        actualizar();
+        buscar();
         break;
       case 5:
-        eliminar();
+        actualizar();
         break;
       case 6:
+        eliminar();
+        break;
+      case 7:
+        verpordueño();
+        break;
+      case 8:
         alert("Saliendo...");
         break;
       default:
@@ -189,5 +279,5 @@ function menu(){
 
     }
 
-  } while (opc!=6);
+  } while (opc != 6);
 };
