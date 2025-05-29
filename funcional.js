@@ -62,8 +62,9 @@ function registrardueño() {
 };
 
 function registrar() {
-  cont=0;
-  cont2=0;
+  
+ var cont=0;
+ var cont2=0;
 
   do {
 
@@ -74,12 +75,12 @@ function registrar() {
         if (j=="Id"){
           if (mascotas[i][j]==id){
             cont2=1;
-          }
+          };
         };
       };
     };
 
-  } while (cont2 == 0);
+  } while (cont2 == 1);
 
 
   do {
@@ -99,7 +100,7 @@ function registrar() {
 
     if (cont==0){
       alert("Dueño no Registrado");
-    }
+    };
 
   } while (cont == 0);
 
@@ -168,7 +169,7 @@ function registrar() {
 
   mascotas[name] = datos;
 
-  
+  dueños[dueño] = mascotas[name];
 
 
 };
@@ -180,8 +181,8 @@ function listar() {
     console.log("-------------------");
     for (const j in mascotas[i]) {
       console.log(j, " - ", mascotas[i][j]);
-    }
-  }
+    };
+  };
 
 };
 
@@ -259,7 +260,40 @@ function eliminar() {
 
   };
 
-}
+};
+
+function verpordueño() {
+var cont=0;
+  var cedula = prompt("Ingrese la cedula del dueño: ");
+    
+    for (const i in dueños) {
+      for (const j in dueños[i]) {
+        if (j=="Cedula"){
+          if (dueños[i][j]==cedula){
+            
+            cont=1;
+
+          };
+        };
+      };
+    };
+
+    if (cont==0){
+      alert("Dueño no Registrado");
+    } else {
+
+      for (const i in dueños) {
+        console.log(i);
+        console.log("-------------------");
+        for (const j in dueños[i]) {
+          console.log(j, " - ", dueños[i][j]);
+        };
+      };
+
+    };
+  
+
+};
 
 
 saludo(function () {
