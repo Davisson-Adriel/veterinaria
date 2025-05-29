@@ -63,6 +63,25 @@ function registrardueño() {
 
 function registrar() {
   cont=0;
+  cont2=0;
+
+  do {
+
+    var id = getRandomInt(1000);
+
+    for (const i in mascotas) {
+      for (const j in mascotas[i]) {
+        if (j=="Id"){
+          if (mascotas[i][j]==id){
+            cont2=1;
+          }
+        };
+      };
+    };
+
+  } while (cont2 == 0);
+
+
   do {
 
     var cedula = prompt("Ingrese la cedula del dueño: ");
@@ -72,6 +91,7 @@ function registrar() {
         if (j=="Cedula"){
           if (dueños[i][j]==cedula){
             cont=1;
+            var dueño=i;
           }
         };
       };
@@ -141,9 +161,15 @@ function registrar() {
     Especie: especie,
     Edad: edad,
     Peso: peso,
-    Estado: estado
+    Estado: estado,
+    Id: id,
+    Id_Dueño: dueño
   };
+
   mascotas[name] = datos;
+
+  
+
 
 };
 
